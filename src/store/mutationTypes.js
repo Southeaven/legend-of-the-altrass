@@ -1,0 +1,13 @@
+export const SET_PLAYED_BEFORE = 'SET_PLAYED_BEFORE'
+export const SET_VERSION = 'SET_VERSION'
+
+/* Navigation */
+export const SET_VISIBILITY = 'SET_VISIBILITY'
+
+/* Leader */
+export const SET_FIRST_NAME = 'SET_FIRST_NAME'
+export const SET_LAST_NAME = 'SET_LAST_NAME'
+
+/* Civilization */
+export const SET_CIVILIZATION_NAME = 'SET_CIVILIZATION_NAME'
+export const SET_CIVILIZATION_DESCRIPTION = 'SET_CIVILIZATION_DESCRIPTION'

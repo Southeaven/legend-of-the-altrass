@@ -1,21 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
+import NewGame from './views/NewGame.vue'
+import Overview from './views/Overview.vue'
+import Options from './views/Options.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/newgame',
+      name: 'newgame',
+      component: NewGame
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/',
+      name: 'overview',
+      component: Overview
+    },
+    {
+      path: '/options',
+      name: 'options',
+      component: Options
     }
   ]
 })
