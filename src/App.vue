@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -49,6 +49,7 @@ export default {
     }
   },
   created () {
+    this.hydrateStore()
     if (this.playedBefore === false) {
       this.$router.replace('/newgame')
     }
@@ -58,6 +59,11 @@ export default {
     ...mapState('navigation', {
       items: 'routes'
     })
+  },
+  methods: {
+    ...mapActions([
+      'hydrateStore'
+    ])
   }
 }
 </script>

@@ -7,6 +7,7 @@ import {
   SET_PLAYED_BEFORE,
   SET_VERSION
 } from './mutationTypes'
+import convertSave from '../utils/convertSave'
 
 Vue.use(Vuex)
 
@@ -25,11 +26,39 @@ const mutations = {
 }
 
 const actions = {
-  setPlayedBefore ({ commit }, payload) {
+  setGameInfo ({ commit }, payload) {
     commit(SET_PLAYED_BEFORE, payload.playedBefore)
-  },
-  setVersion ({ commit }, payload) {
     commit(SET_VERSION, payload.version)
+  },
+  hydrateStore ({ dispatch }) {
+    if (localStorage.getItem('the-lands-of-altrass')) {
+      const loadedData = JSON.parse(localStorage.getItem('the-lands-of-altrass'))
+      const savedData = convertSave(loadedData)
+      dispatch('setGameInfo', {
+        playedBefore: savedData.playedBefore,
+        version: savedData.version
+      })
+      dispatch('navigation/setRoutes', { routes: savedData.navigation.routes })
+      dispatch('leader/setName', {
+        firstName: savedData.leader.firstName,
+        lastName: savedData.leader.lastName
+      })
+      dispatch('civilization/setCivilization', {
+        name: savedData.civilization.name,
+        description: savedData.civilization.description
+      })
+      console.log('Game data loaded!')
+    }
+  },
+  persistStore ({ state }) {
+    let preparedData = {}
+    preparedData.playedBefore = state.playedBefore
+    preparedData.version = state.version
+    preparedData.navigation = state.navigation
+    preparedData.leader = state.leader
+    preparedData.civilization = state.civilization
+    localStorage.setItem('the-lands-of-altrass', JSON.stringify(preparedData))
+    console.log('Game data saved!')
   }
 }
 
@@ -41,5 +70,6 @@ export default new Vuex.Store({
   },
   state,
   mutations,
-  actions
+  actions,
+  strict: process.env.NODE_ENV !== 'production'
 })

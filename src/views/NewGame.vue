@@ -141,10 +141,8 @@ export default {
     advanceLeaderStep () {
       this.$v.leaderStep.$touch()
       if (!this.$v.leaderStep.$invalid) {
-        this.setVersion({
-          version: '0.1.0'
-        })
-        this.setPlayedBefore({
+        this.setGameInfo({
+          version: '0.1.0',
           playedBefore: true
         })
         this.setCivilization({
@@ -170,8 +168,7 @@ export default {
       }
     },
     ...mapActions([
-      'setPlayedBefore',
-      'setVersion'
+      'setGameInfo'
     ]),
     ...mapActions('civilization', [
       'setCivilization'

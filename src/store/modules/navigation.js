@@ -31,6 +31,14 @@ const mutations = {
 }
 
 const actions = {
+  setRoutes ({ commit }, payload) {
+    payload.routes.forEach(element => {
+      commit(SET_VISIBILITY, {
+        description: element.title,
+        visible: element.visible
+      })
+    })
+  },
   setVisibility ({ commit }, payload) {
     commit(SET_VISIBILITY, {
       description: payload.description,
